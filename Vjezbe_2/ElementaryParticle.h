@@ -1,10 +1,10 @@
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
 class ElementaryParticle
 {
-   public:
+public:
    ElementaryParticle(string _name, float _mass, bool _isBoson);
    void printInfo();
    string name;
