@@ -11,70 +11,90 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include <TH1F.h>
+#include <TCanvas.h>
 
 // Header file for the classes stored in the TTree if any.
 
-class Analyzer {
-public :
-   TTree          *fChain;   //!pointer to the analyzed TTree or TChain
-   Int_t           fCurrent; //!current Tree number in a TChain
+class Analyzer
+{
+public:
+   // TTree *fChain;  //! pointer to the analyzed TTree or TChain
+   TTree *tree;
+   Int_t fCurrent; //! current Tree number in a TChain
 
-// Fixed size dimensions of array or collections stored in the TTree if any.
+   // Fixed size dimensions of array or collections stored in the TTree if any.
 
    // Declaration of leaf types
-   Float_t         var;
+   Float_t var;
 
    // List of branches
-   TBranch        *b_var;   //!
+   TBranch *b_var; //!
 
-   Analyzer(TTree *tree=0);
+   // Analyzer(TTree *tree = 0);
+   Analyzer();
    virtual ~Analyzer();
-   virtual Int_t    Cut(Long64_t entry);
-   virtual Int_t    GetEntry(Long64_t entry);
-   virtual Long64_t LoadTree(Long64_t entry);
-   virtual void     Init(TTree *tree);
-   virtual void     Loop();
-   virtual Bool_t   Notify();
-   virtual void     Show(Long64_t entry = -1);
+   // virtual Int_t Cut(Long64_t entry);
+   // virtual Int_t GetEntry(Long64_t entry);
+   // virtual Long64_t LoadTree(Long64_t entry);
+   // virtual void Init(TTree *tree);
+   // virtual void Loop();
+   // virtual Bool_t Notify();
+   // virtual void Show(Long64_t entry = -1);
+   virtual void PlotHistogram(TString input_file_name);
+
+private:
+   TFile *file;
+   // TTree *tree;
+   TH1F *Histogram;
+   TCanvas *c;
+   Float_t t, sum;
+   Int_t i, nentries;
 };
 
 #endif
 
 #ifdef Analyzer_cxx
-Analyzer::Analyzer(TTree *tree) : fChain(0) 
+Analyzer::Analyzer(TTree *tree) : fChain(0)
 {
-// if parameter tree is not specified (or zero), connect the file
-// used to generate this class and read the Tree.
-   if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/public/data/Toy/ToyTree.root");
-      if (!f || !f->IsOpen()) {
+   // if parameter tree is not specified (or zero), connect the file
+   // used to generate this class and read the Tree.
+   if (tree == 0)
+   {
+      TFile *f = (TFile *)gROOT->GetListOfFiles()->FindObject("/home/public/data/Toy/ToyTree.root");
+      if (!f || !f->IsOpen())
+      {
          f = new TFile("/home/public/data/Toy/ToyTree.root");
       }
-      f->GetObject("tree",tree);
-
+      f->GetObject("tree", tree);
    }
    Init(tree);
 }
 
 Analyzer::~Analyzer()
 {
-   if (!fChain) return;
+   if (!fChain)
+      return;
    delete fChain->GetCurrentFile();
 }
 
 Int_t Analyzer::GetEntry(Long64_t entry)
 {
-// Read contents of entry.
-   if (!fChain) return 0;
+   // Read contents of entry.
+   if (!fChain)
+      return 0;
    return fChain->GetEntry(entry);
 }
 Long64_t Analyzer::LoadTree(Long64_t entry)
 {
-// Set the environment to read one entry
-   if (!fChain) return -5;
+   // Set the environment to read one entry
+   if (!fChain)
+      return -5;
    Long64_t centry = fChain->LoadTree(entry);
-   if (centry < 0) return centry;
-   if (fChain->GetTreeNumber() != fCurrent) {
+   if (centry < 0)
+      return centry;
+   if (fChain->GetTreeNumber() != fCurrent)
+   {
       fCurrent = fChain->GetTreeNumber();
       Notify();
    }
@@ -92,7 +112,8 @@ void Analyzer::Init(TTree *tree)
    // (once per file to be processed).
 
    // Set branch addresses and branch pointers
-   if (!tree) return;
+   if (!tree)
+      return;
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
@@ -114,16 +135,17 @@ Bool_t Analyzer::Notify()
 
 void Analyzer::Show(Long64_t entry)
 {
-// Print contents of entry.
-// If entry is not specified, print current entry
-   if (!fChain) return;
+   // Print contents of entry.
+   // If entry is not specified, print current entry
+   if (!fChain)
+      return;
    fChain->Show(entry);
 }
 Int_t Analyzer::Cut(Long64_t entry)
 {
-// This function may be called from Loop.
-// returns  1 if entry is accepted.
-// returns -1 otherwise.
+   // This function may be called from Loop.
+   // returns  1 if entry is accepted.
+   // returns -1 otherwise.
    return 1;
 }
 #endif // #ifdef Analyzer_cxx
