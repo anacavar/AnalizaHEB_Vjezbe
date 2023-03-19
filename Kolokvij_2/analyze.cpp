@@ -1,22 +1,14 @@
-// C++
-#include <iostream>
-#include <fstream>
-
-// My own class
+// #include <iostream>
+// #include <fstream>
 #include <Analyzer.h>
 
-using namespace std;
+// using namespace std;
 
 int main()
 {
-  // Declare Analyzer
-  Analyzer *analyzer;
-
-  analyzer = new Analyzer();
-
-  analyzer->PlotHistogram("/home/public/data/Toy/ToyTree.root");
-
-  delete analyzer;
-
+  Analyzer *analyzer = new Analyzer();
+  // analyzer->PlotHistogram("/home/public/data/Toy/ToyTree.root");
+  analyzer->FitToy();
+  analyzer->~Analyzer();
   return 0;
 }
