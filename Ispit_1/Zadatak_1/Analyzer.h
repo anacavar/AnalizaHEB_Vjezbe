@@ -1,5 +1,4 @@
 #include <TROOT.h>
-// #include <TChain.h>
 #include <TFile.h>
 #include <TH1F.h>
 #include <TF1.h>
@@ -21,9 +20,9 @@ public:
 private:
    TFile *file;
    TTree *tree;
-   TF1 *exp;
+   TF1 *fit;
    TCanvas *c;
    TGraphErrors *graf;
-   // Float_t x, y, error_x, error_y;
-   Int_t i, nentries;
+   Float_t x, y, error;
+   Int_t i, entries;
 };
