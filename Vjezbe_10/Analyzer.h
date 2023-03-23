@@ -21,17 +21,11 @@ using namespace std;
 class Analyzer
 {
 public:
-  Analyzer();  // konstruktor?
-  ~Analyzer(); // destruktor?
+  Analyzer();
+  ~Analyzer();
   void MojaFunkcija();
-  // void LifetimeFit();
-  // void PlotIndividualLikelihood();
 
 private:
-  // TCanvas *canvas;
-  // TGraphErrors *graf; // ili pointer??
-  // TF1 *fit, *ChiSquare_function;
-  // float m_, F_, a_, s_m, s_F, s_A;
   TCanvas *c;
   TGraphErrors *gr;
   TF1 *fit_funciton;

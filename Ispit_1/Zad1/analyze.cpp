@@ -8,7 +8,7 @@ int main()
 {
   Analyzer *analyzer;
   analyzer = new Analyzer();
-  analyzer->PlotHistogram();
+  analyzer->ChiSquareFit();
   analyzer->~Analyzer();
   return 0;
 }

@@ -10,31 +10,6 @@ Analyzer::~Analyzer()
 
 void Analyzer::MojaFunkcija()
 {
-  // int i;
-  // float rezultati[5] = {9.8, 21.2, 34.5, 39.9, 48.5};
-  // float greske[5] = {1.0, 1.9, 3.1, 3.9, 5.1};
-  // float sile[5] = {1, 2, 3, 4, 5};
-  // float sile_e[5] = {0, 0, 0, 0, 0};
-  // canvas = new TCanvas("canvas", "Graffff", 1000, 1000);
-  // graf = new TGraphErrors(5, sile, rezultati, sile_e, greske);
-  // graf->SetTitle("TGraphErrors Example");
-  // graf->SetMarkerColor(kBlack);
-  // graf->SetMarkerStyle(21);
-
-  // fit = new TF1("fit", "x/[0]", 0, 5); // odkud, dokud ZAŠŠ??? valjda jer m = F/a
-  // fit->SetParName(0, "mass");
-  // fit->SetParameter(0, 0.1);
-  // graf->Fit(fit);
-  // graf->Draw("ALP");
-
-  // m_ = 0;
-  // for (i = 0; i < 5; i++)
-  // {
-  //   m_ = m_ + (sile[i] / rezultati[i]);
-  // }
-
-  // m_ = m_ / 5;
-  // cout << m_ << endl;
 
   c = new TCanvas("c", "c", 1200, 800);
   c->Divide(2);
