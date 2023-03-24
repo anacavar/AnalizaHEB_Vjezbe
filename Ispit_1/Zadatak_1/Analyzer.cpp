@@ -1,8 +1,4 @@
 #include <Analyzer.h>
-#include <TCanvas.h>
-#include <TFile.h>
-#include <TH1F.h>
-#include <TBranch.h>
 
 Analyzer::Analyzer()
 {
